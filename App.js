@@ -1,12 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import DrawingPanel from './DrawingPanel';
+import QuickTest from './components/QuickTest.js'
 
 export default function App() {
   return (
     <View style={styles.container}>
-      {/* <Text>Open up App.js to start working on your app!</Text> */}
-      <DrawingPanel />
+      <Text>Test App</Text>
+      <QuickTest />
       <StatusBar style="auto" />
     </View>
   );
