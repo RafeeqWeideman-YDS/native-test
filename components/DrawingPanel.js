@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { ColorPicker } from 'react-native-color-picker';
 
 const PIXEL_SIZE = 20;
 
-const Pixel = ({ color, onPress }) => {
+const Pixel = React.memo(({ color, onPress }) => {
+    const handlePress = useCallback(() => {
+        onPress && onPress();
+    }, [onPress]);
+
     return (
-        <TouchableOpacity onPress={onPress}>
-            <View style={[styles.pixel, { backgroundColor: color }]} />
-        </TouchableOpacity>
+        <View style={[styles.pixel, { backgroundColor: color }]} onTouchStart={handlePress} />
     );
-};
+});
 
 const DrawingPanel = () => {
     const [pixels, setPixels] = useState(Array.from({ length: 20 }, () => Array.from({ length: 20 }, () => '#FFFFFF')));
@@ -43,13 +45,15 @@ const DrawingPanel = () => {
                     defaultColor={selectedColor}
                     style={{ width: 200, height: 200 }} />
             </View>
+
             {pixels.map((row, rowIndex) =>
                 <View key={rowIndex} style={styles.row}>
                     {row.map((color, colIndex) =>
-                        <Pixel key={`${rowIndex}-${colIndex}`} color={color} onPress={() => handlePixelPress(rowIndex, colIndex)} />
+                        <Pixel style={styles.canvas} key={`${rowIndex}-${colIndex}`} color={color} onPress={() => handlePixelPress(rowIndex, colIndex)} />
                     )}
                 </View>
             )}
+            
         </View>
     );
 };
@@ -75,7 +79,10 @@ const styles = StyleSheet.create({
     selectedToolButton: {
         backgroundColor: "#333",
         color: "#FFF"
-    }
+    },
+    toolbar: {
+        display: 'none'
+    },
 });
 
 export default DrawingPanel;

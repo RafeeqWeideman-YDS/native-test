@@ -1,12 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import QuickTest from './components/QuickTest.js'
+// import DrawingPanel from './components/DrawingPanel';
+// import LayerSys from './components/LayerSys';
+import Canvas from './components/Canvas';
+import LayerSysNative from './components/LayerSysNative';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Test App</Text>
-      <QuickTest />
+      {/* <Text>Test App</Text> */}
+      <LayerSysNative />
+      <Canvas PixelSize={15} />
       <StatusBar style="auto" />
     </View>
   );
