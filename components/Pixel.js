@@ -19,4 +19,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Pixel;
+export default Pixel; 

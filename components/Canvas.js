@@ -15,7 +15,7 @@ const Pixel = React.memo(({ color, onPress, PixelSize }) => {
 
 const DrawingPanel = ({ PixelSize, disableSetPixels }) => {
     const [pixels, setPixels] = useState(Array.from({ length: 20 }, () => Array.from({ length: 20 }, () => '#FFFFFF')));
-    
+
 
     const handlePixelPress = (rowIndex, colIndex) => {
         if (!disableSetPixels) {
@@ -31,7 +31,12 @@ const DrawingPanel = ({ PixelSize, disableSetPixels }) => {
                 {pixels.map((row, rowIndex) =>
                     <View key={rowIndex} style={styles.row}>
                         {row.map((color, colIndex) =>
-                            <Pixel key={`${rowIndex}-${colIndex}`} color={color} onPress={() => handlePixelPress(rowIndex, colIndex)} PixelSize={PixelSize} disableSetPixels={disableSetPixels} />
+                            <Pixel
+                                key={`${rowIndex}-${colIndex}`}
+                                color={color} onPress={() => handlePixelPress(rowIndex, colIndex)}
+                                PixelSize={PixelSize}
+                                disableSetPixels={disableSetPixels}
+                            />
                         )}
                     </View>
                 )}

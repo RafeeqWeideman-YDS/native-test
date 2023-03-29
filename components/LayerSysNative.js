@@ -2,18 +2,18 @@ import React, { useState, useCallback } from "react";
 import { View, FlatList, StyleSheet, Button } from 'react-native';
 import Canvas from "./Canvas";
 
-const LayerSysNative = () => {
+const LayerSysNative = ({ showAddButton = true, PixelSize = 5, disableSetPixels = true }) => {
     const [layers, setLayers] = useState([
-        { canvas: <Canvas style={styles.canvas} PixelSize={5} disableSetPixels={true} /> }
+        { canvas: <Canvas style={styles.canvas} PixelSize={PixelSize} disableSetPixels={disableSetPixels} /> }
     ])
 
     const handleAddLayers = useCallback(() => {
-        setLayers([...layers, { canvas: <Canvas style={styles.canvas} PixelSize={5} disableSetPixels={true} /> }])
-    })
+        setLayers([...layers, { canvas: <Canvas style={styles.canvas} PixelSize={PixelSize} disableSetPixels={disableSetPixels} /> }])
+    }, [layers, PixelSize, disableSetPixels])
 
     return (
         <View style={styles.container} >
-            <Button style={styles.layerBtn} title="ADD" onPress={handleAddLayers} />
+            {showAddButton && <Button style={styles.layerBtn} title="ADD" onPress={handleAddLayers} />}
             <FlatList
                 data={layers}
                 renderItem={({ item }) => item.canvas}
